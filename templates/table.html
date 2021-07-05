@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CryptoCurrency Screener</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+</head> 
+
+<style>
+    ::-webkit-scrollbar {
+        display: none;
+        }
+
+table tbody {
+  display: block;
+  height: 400px;
+  overflow-y: scroll;
+}
+
+table thead, table tbody tr {
+  display: table;
+  max-height: 400px;
+  width: 100%;
+  table-layout: fixed;
+}
+</style>
+<body style="background-color: steelblue;">
+
+    <center><h2 style="margin-top: 50px;"  class="ui icon header">
+        <i class="table icon"></i>
+        <div class="content">
+          Top 25 CryptoCurrencies
+        </div>
+      </h2></center>
+
+        <div style="margin-top: 20px;" class="ui container">
+        <table class="ui unstackable selectable inverted table">
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Name</th>
+                    <th>Price (₹)
+                    </th>
+                    <th>Change (₹)</th>
+                    <th>Change %</th>
+                    <th>Market Cap (₹)</th>
+                </tr>
+            </thead>
+            <tbody id='table'>
+            <script>
+                $(document).ready(function () {
+    
+                    function refresh()
+                    {
+                    $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/table", 
+                            function (data) {
+                        var cryptos = '';
+    
+                        $.each(data, function (key, value) {
+    
+                            cryptos += '<tr>';
+                            cryptos += '<td>' + 
+                                '<img src='+value.symbol+'>' + '</td>';
+    
+                            cryptos += '<td>' + 
+                                value.name + '</td>';
+
+                            cryptos += '<td>' + 
+                                value.price + '</td>';
+
+                            cryptos += '<td>' + 
+                                value.chg + '</td>'; 
+
+                            cryptos += '<td>' + 
+                                value.chg_per + '</td>';    
+                                
+                            cryptos += '<td>' + 
+                                value.market_cap + '</td>';
+
+                            cryptos += '</tr>';
+    
+                        });
+                            
+                        $('#table').append(cryptos);
+                    });
+                }
+                refresh()
+                setInterval(function()
+                    {
+                        $('#table').empty();
+                        refresh()
+                    }, 15000);
+                });
+            </script>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
