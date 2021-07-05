@@ -43,21 +43,21 @@ table thead, table tbody tr {
                 <tr>
                     <th>Symbol</th>
                     <th>Name</th>
-                    <th>Price (₹)
+                    <th>Price ($)
                     </th>
-                    <th>Change (₹)</th>
+                    <th>Change ($)</th>
                     <th>Change %</th>
-                    <th>Market Cap (₹)</th>
+                    <th>Market Cap ($)</th>
                 </tr>
             </thead>
             <tbody id='table'>
             <script>
-                $(document).ready(function () {
+                window.onload= refresh
     
-                    function refresh()
-                    {
+                function refresh(){
+                    console.time("load")
                     $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/table", 
-                            function (data) {
+                        function (data) {
                         var cryptos = '';
     
                         $.each(data, function (key, value) {
@@ -84,17 +84,45 @@ table thead, table tbody tr {
                             cryptos += '</tr>';
     
                         });
-                            
+                        console.log('main') 
                         $('#table').append(cryptos);
+                        console.timeEnd('load')
                     });
                 }
-                refresh()
+
                 setInterval(function()
                     {
-                        $('#table').empty();
-                        refresh()
+                        refresh2()
                     }, 15000);
-                });
+                ;
+
+               function refresh2(){
+                    console.time("refresh")
+                    $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/table", 
+                            function (data) {
+                        
+                        var i=0       
+                        $.each(data, function (key, value) {
+                            var x = document.getElementById('table')
+                            var y = x.rows.item(i).cells
+                            y.item(2).innerHTML = value.symbol
+                            y.item(2).innerHTML = value.name
+                            y.item(2).innerHTML = value.price
+                            y.item(3).innerHTML = value.chg
+                            y.item(4).innerHTML = value.chg_per
+                            y.item(5).innerHTML = value.market_cap
+                            i++
+                            
+
+                        })
+                        console.timeEnd("refresh")
+                        console.log("ref")
+                    })
+                }
+
+                
+                
+                
             </script>
             </tbody>
         </table>
