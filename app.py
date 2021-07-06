@@ -22,7 +22,6 @@ def table_creator():
 @app.route("/<crypto>")
 def index(crypto):
     supported_cryptos = requests.get(API_URL).json().keys()
-    print(supported_cryptos)
     if crypto in supported_cryptos:
         return render_template("chart.html",crypto=crypto)
     return "This Cryptocurrency is not yet supported!"

@@ -1,7 +1,7 @@
 
 ::-webkit-scrollbar {
     width: 12px;
-    background-color: blanchedalmond;
+    background-color: rgb(255, 255, 255);
 
 }
  
@@ -11,7 +11,7 @@
  
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: blanchedalmond;
+    background-color:rgb(0, 0, 0);
 
 }
 
