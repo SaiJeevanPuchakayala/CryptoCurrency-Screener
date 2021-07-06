@@ -8,7 +8,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<link rel="stylesheet" href="static/css/table.css">
+<link rel="icon" href="{{ url_for('static', filename = 'images/favicon1.png') }}" type="image/icon type">
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/table.css') }}">
 </head> 
 
 <body style="background-color: rgb(48, 143, 221);">
@@ -107,10 +108,7 @@
                         console.timeEnd("refresh")
                     })
                 }
-
-                
-                
-                
+               
             </script>
             </tbody>
         </table>
