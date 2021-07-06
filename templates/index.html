@@ -10,35 +10,96 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lilita+One|Ubuntu&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/b23a79e4da.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-<body>
-  <img src="/static/images/cover.png" alt="crypto">
-  <div class = "features">
-    <div class="card rounded border-dark" style="width: 18rem;">
-      <img class="card-img-top" src="/static/images/placeholder-image.png" alt="Card image cap">
-      <div class="card-body">
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      </div>
-    </div>
 
-    <div class="card rounded border-dark" style="width: 18rem;">
-      <img class="card-img-top" src="/static/images/placeholder-image.png" alt="Card image cap">
-      <div class="card-body">
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      </div>
-    </div>
-
-    <div class="card rounded border-dark" style="width: 18rem;">
-      <img class="card-img-top" src="/static/images/placeholder-image.png" alt="Card image cap">
-      <div class="card-body">
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      </div>
-    </div>
-  </div>
-
+<style>
+  .carousel{
+    margin-top: 50px;
+  }
+  .carousel-inner{
+    height: 100px;
+  }
+  .carousel-caption{
+    color: #fff;
+    top: 75%;
+  }
   
-      
+</style>
+
+
+<!-- Home Starts -->
+<body style="background-color:#4169E1;">
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1>CryptoCurrency Screener</h1>      
+        <p>A web app created to have a glance over the real-time trends of Cryptocurrency and hot news at your fingertips.</p>
+    </div>
+</div>
+<!-- Home Ends -->
+
+
+<!-- News Section Start -->
+<div style="background-color:#3d4869;"  class="ui container">
+<br>
+  <br>
+    <br>
+          <h2 style="color:white;" class="ui center aligned icon header">
+              <i class="newspaper outline icon"></i>
+              Top Trending News
+          </h2>
+
+
+          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                  <div class="carousel-item active">
+                  <div class="carousel-caption">
+                      <h3>Swipe right for top trending news of CryptoCurrency</h3>
+                  </div>
+                  </div>
+                  <center>
+                  {% for new in news%}
+                  <div class="carousel-item">
+                  <div class="carousel-caption">
+                      <h3>{{new}}</h3>
+                  </div>
+                  </div>
+                  {% endfor%}
+                  </center>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+              </a>
+          </div>
+        <br>
+      <br>
+    <br>
+  <br>
+<br>
+</div>
+<!-- News Section Ends -->
+
+<!-- Features Section Starts -->
+
+<!-- Features Section Ends -->
+
+
+<!-- Footer Section Starts -->
+
+<!-- Footer Section Ends -->
 </body>
-
-
 </html>
