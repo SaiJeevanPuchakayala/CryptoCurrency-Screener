@@ -1,0 +1,15 @@
+img{
+    height: 100%;
+    width: 100%;
+}
+
+.features{
+    display: flex;
+    justify-content: space-around;
+}
+
+.card{
+    margin-top: 20px;
+    
+}
+
