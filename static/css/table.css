@@ -1,0 +1,60 @@
+
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: blanchedalmond;
+
+}
+ 
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: blanchedalmond;
+
+}
+
+table tbody {
+  display: block;
+  height: 400px;
+  overflow-y: scroll;
+  
+}
+
+table thead, table tbody tr {
+  display: table;
+  max-height: 400px;
+  width: 100%;
+  table-layout: fixed;
+}
+
+
+.loader {
+    border: 10px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 10px solid #3498db;
+    width: 100px;
+    height: 100px;
+    -webkit-animation: spin 5s linear; /* Safari */
+    animation: spin 5s linear;
+    position: fixed;
+    top: 50%;
+    left: 45%;
+    /* transform: translate(-50%, -50%);
+    transform: -webkit-translate(-50%, -50%);
+    transform: -moz-translate(-50%, -50%);
+    transform: -ms-translate(-50%, -50%); */
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+

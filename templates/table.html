@@ -8,39 +8,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<link rel="stylesheet" href="static/css/table.css"
 </head> 
 
-<style>
-::-webkit-scrollbar {
-    width: 12px;
-    background-color: blanchedalmond;
-
-}
- 
-::-webkit-scrollbar-track {
-    border-radius: 10px;
-}
- 
-::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: blanchedalmond;
-
-}
-
-table tbody {
-  display: block;
-  height: 400px;
-  overflow-y: scroll;
-  
-}
-
-table thead, table tbody tr {
-  display: table;
-  max-height: 400px;
-  width: 100%;
-  table-layout: fixed;
-}
-</style>
 <body style="background-color: steelblue;">
 
     <center><h2 style="margin-top: 50px;"  class="ui icon header">
@@ -62,12 +32,15 @@ table thead, table tbody tr {
                     <th>Change %</th>
                     <th>Market Cap ($)</th>
                 </tr>
+
             </thead>
             <tbody id='table'>
+                <div id="loader" class="loader"></div>
             <script>
                 window.onload= refresh
     
                 function refresh(){
+                    
                     console.time("load")
                     $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/table", 
                         function (data) {
@@ -97,7 +70,8 @@ table thead, table tbody tr {
                             cryptos += '</tr>';
     
                         });
-                        console.log('main') 
+                        console.log('main')
+                        document.getElementById("loader").style.visibility = "hidden";
                         $('#table').append(cryptos);
                         console.timeEnd('load')
                     });
@@ -108,6 +82,7 @@ table thead, table tbody tr {
                         refresh2()
                     }, 15000);
                 ;
+
 
                function refresh2(){
                     console.time("refresh")
@@ -128,8 +103,8 @@ table thead, table tbody tr {
                             
 
                         })
-                        console.timeEnd("refresh")
                         console.log("ref")
+                        console.timeEnd("refresh")
                     })
                 }
 
