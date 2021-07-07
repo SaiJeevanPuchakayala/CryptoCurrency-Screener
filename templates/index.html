@@ -67,49 +67,32 @@
 
 
 <!-- (Features Section) -->
-<div id="services" class="container-fluid text-center">
+<div id="services" class="container-fluid text-center bg-grey">
     <h2>Features</h2>
     <h4>What we offer</h4>
     <br>
     <div class="row slideanim">
     <div class="col-sm-4">
-        <span class="glyphicon glyphicon-off logo-small"></span>
-        <h4>POWER</h4>
-        <p>Lorem ipsum dolor sit amet..</p>
+        <span class="glyphicon glyphicon-time logo-small"></span>
+        <h4>RealTime Data</h4>
+        <p>Get your daily dose of 24/7 Realtime data and stay woke</p>
     </div>
     <div class="col-sm-4">
-        <span class="glyphicon glyphicon-heart logo-small"></span>
-        <h4>LOVE</h4>
-        <p>Lorem ipsum dolor sit amet..</p>
+        <span class="glyphicon glyphicon-screenshot logo-small"></span>
+        <h4>Accuracy</h4>
+        <p>Accurate Realtime Data, automatically updated stats and news</p>
     </div>
     <div class="col-sm-4">
-        <span class="glyphicon glyphicon-lock logo-small"></span>
-        <h4>JOB DONE</h4>
-        <p>Lorem ipsum dolor sit amet..</p>
+        <span class="glyphicon glyphicon-signal logo-small"></span>
+        <h4>Screener</h4>
+        <p>Have a clear visualisation about the trends</p>
     </div>
     </div>
     <br><br>
-    <div class="row slideanim">
-    <div class="col-sm-4">
-        <span class="glyphicon glyphicon-leaf logo-small"></span>
-        <h4>GREEN</h4>
-        <p>Lorem ipsum dolor sit amet..</p>
-    </div>
-    <div class="col-sm-4">
-        <span class="glyphicon glyphicon-certificate logo-small"></span>
-        <h4>CERTIFIED</h4>
-        <p>Lorem ipsum dolor sit amet..</p>
-    </div>
-    <div class="col-sm-4">
-        <span class="glyphicon glyphicon-wrench logo-small"></span>
-        <h4 style="color:#303030;">HARD WORK</h4>
-        <p>Lorem ipsum dolor sit amet..</p>
-    </div>
-    </div>
 </div>
 
 <!-- (News Section) -->
-<div id="portfolio" class="container-fluid text-center bg-grey">
+<div id="portfolio" class="container-fluid text-center bg-blue">
     <h2>News</h2><br>
 
     <h2>Top Trending News is Here</h2>
@@ -144,19 +127,19 @@
     <div class="row text-center slideanim">
     <div class="col-sm-4">
         <div class="thumbnail">
-        <img src="" alt="Paris" width="400" height="300">
+        <img src="{{ url_for('static', filename = 'images/economics.png') }}" alt="Paris" width="400" height="300">
         <p><strong>Economic Times</strong></p>
         </div>
     </div>
     <div class="col-sm-4">
         <div class="thumbnail">
-        <img src="" alt="New York" width="400" height="300">
+        <img src="{{ url_for('static', filename = 'images/times.png') }}" alt="New York" width="400" height="300">
         <p><strong>Times Of India</strong></p>
         </div>
     </div>
     <div class="col-sm-4">
         <div class="thumbnail">
-        <img src="" alt="San Francisco" width="400" height="300">
+        <img src="{{ url_for('static', filename = 'images/deccan.png') }}" alt="San Francisco" width="400" height="300">
         <p><strong>Deccan Chronicle</strong></p>
         </div>
     </div>
