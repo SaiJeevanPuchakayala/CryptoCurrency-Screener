@@ -64,14 +64,7 @@ def chart_creator():
     return render_template("chart2.html")   
 
 
-@app.route("/<crypto>")
-def index(crypto):
-    supported_cryptos = requests.get(API_URL).json().keys()
-    crypt_values = requests.get(API_URL).json().values()
-    print(list(crypt_values)[0])
-    if crypto in supported_cryptos:
-        return render_template("chart.html",crypto=crypto)
-    return "This Cryptocurrency is not yet supported!"
+
 
 
 

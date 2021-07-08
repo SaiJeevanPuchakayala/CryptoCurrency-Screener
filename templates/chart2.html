@@ -13,12 +13,12 @@
     <div class="container">
         <div class="row">
             <div>
-                <h3 id="title">BTC</h3>
+                <h3 id="title">BITCOIN</h3>
             </div>
             <hr>
             <div>
                    Crypto Currencies: <select id="cryptos">
-                    <option value="" selected="selected">Select crypto</option>
+                    <option value="" selected="selected">Select Crypto Currency</option>
                   </select>
                   
             </div>
@@ -48,19 +48,19 @@
 
         $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chart", 
             function (data) {
-                
-                // $.each(data, function(key,value){
-                //     keys2.push(key)
-                // })
 
                 keys1 = Object.keys(data)
+                j=0
+                keys2 = Object.values(data)
                 console.log(api)
                 var cryptoSel = document.getElementById("cryptos");
                 keys1.forEach(function(x){
-                    cryptoSel.options[cryptoSel.options.length] = new Option(x, x);
+                    cryptoSel.options[cryptoSel.options.length] = new Option(keys2[j].substring(0, keys2[j].length-4), x);
+                    j++
                 })
                 cryptoSel.onchange = function(){
                     sel = this.value
+                    sel2 = cryptoSel.options[cryptoSel.selectedIndex].text
                     console.log(sel)
                     api2 = api + sel
                     console.log(api2)
@@ -89,7 +89,7 @@
                                 
                         })
                     })
-                    document.getElementById('title').innerText = sel
+                    document.getElementById('title').innerText = sel2.toUpperCase()
 
 
 
