@@ -55,43 +55,50 @@
                 console.log(api)
                 var cryptoSel = document.getElementById("cryptos");
                 keys1.forEach(function(x){
-                    cryptoSel.options[cryptoSel.options.length] = new Option(keys2[j].substring(0, keys2[j].length-4), x);
+                    cryptoSel.options[cryptoSel.options.length] = new Option(keys2[j], x);
                     j++
                 })
                 cryptoSel.onchange = function(){
                     sel = this.value
                     sel2 = cryptoSel.options[cryptoSel.selectedIndex].text
+                    if (sel2 !== "Select Crypto Currency"){
                     console.log(sel)
                     api2 = api + sel
                     console.log(api2)
                     lineChart.destroy()
+                    // clearInterval(set_inv)
                     i=0
                     d=[]
+                    p=[]
                     config.data.labels = []
                     config.data.datasets[0].data = []
                     context = document.getElementById('canvas').getContext('2d');
                     lineChart = new Chart(context, config);
-
                     $.getJSON(api2, 
                         function (data) {
-                            $.each(data.prices.reverse(), function (key, value) {
-                                // console.log(value.time.slice(11, 19))
-                                config.data.labels.push(value.time.slice(11, 19));
-                                config.data.datasets[0].data.push(value.price);
-                                lineChart.update();
-                                d.push(value)
+                            $.each(data.prices, function (key, value) {
+                                p.push(value.price)
+                                d.push(value.time.slice(11, 19))
                                 i++
                                 if(i>=10){
                                     i=0
                                     console.log(d)
+                                    config.data.labels = d.reverse()
+                                    config.data.datasets[0].data = p
+                                    lineChart.update();
                                     return false
                                 }
+                                
                                 
                         })
                     })
                     document.getElementById('title').innerText = sel2.toUpperCase()
+                    setInterval(function()
+                    {
+                        continue_callback2()
+                    }, 10000);
 
-
+                    }
 
                 }
 
@@ -161,25 +168,60 @@
     //     }
         i=0
         d=[]
+        p=[]
         $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chartdata?crypto_name=BTC", 
             function (data) {
-                $.each(data.prices.reverse(), function (key, value) {
-                    // console.log(value.time.slice(11, 19))
-                    config.data.labels.push(value.time.slice(11, 19));
-                    config.data.datasets[0].data.push(value.price);
-                    lineChart.update();
-                    d.push(value)
+                $.each(data.prices, function (key, value) {
+                    p.push(value.price)
+                    d.push(value.time.slice(11, 19))
                     i++
                     if(i>=10){
                         i=0
                         console.log(d)
+                        config.data.labels = d.reverse()
+                        config.data.datasets[0].data = p
+                        lineChart.update();
                         return false
                     }
                     
              })
         })
+
+        // var set_inv = setInterval(function()
+        //             {
+        //                 continue_callback()
+        //             }, 10000);
         
-    });
+        
+    
+
+    function continue_callback(){
+        console.log("k")
+        $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chartdata?crypto_name=BTC", 
+            function (data) {
+                $.each(data.prices, function (key, value) {
+                    // console.log(value.time.slice(11, 19))
+                    config.data.labels.shift();
+                    config.data.datasets[0].data.shift();
+                    config.data.labels.push(value.time.slice(11, 19));
+                    config.data.datasets[0].data.push(value.price);
+                    lineChart.update();
+                    d.push(value)
+                    console.log(d)
+                    return false
+                    
+                    
+             })
+        })
+
+    }
+
+    function continue_callback2(){
+        console.log("h")
+    }
+
+});
+
 </script>
 
 </body>
