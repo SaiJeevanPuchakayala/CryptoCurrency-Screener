@@ -43,10 +43,10 @@
         var keys1 = []
         var sel = "k"
         var keys2 = []
-        var api = "https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chartdata?crypto_name="
+        var api = "https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chart-data2?crypto_name="
 
 
-        $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chart", 
+        $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chart-symbols1", 
             function (data) {
 
                 keys1 = Object.keys(data)
@@ -169,7 +169,7 @@
         i=0
         d=[]
         p=[]
-        $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chartdata?crypto_name=BTC", 
+        $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chart-data2?crypto_name=BTC", 
             function (data) {
                 $.each(data.prices, function (key, value) {
                     p.push(value.price)
