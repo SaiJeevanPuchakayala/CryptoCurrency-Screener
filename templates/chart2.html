@@ -37,16 +37,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!--suppress JSUnresolvedLibraryURL -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script>
     $(document).ready(function () {
         var name_obj = []
         var keys1 = []
         var sel = "k"
         var keys2 = []
-        var api = "https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chartdata?crypto_name="
+        var api = "https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chart-data2?crypto_name="
 
 
-        $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chart", 
+        $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chart-symbols1", 
             function (data) {
 
                 keys1 = Object.keys(data)
@@ -78,7 +80,7 @@
                         function (data) {
                             $.each(data.prices, function (key, value) {
                                 p.push(value.price)
-                                d.push(value.time.slice(11, 19))
+                                d.push(moment(value.time).format("LTS").slice(0,7))
                                 i++
                                 if(i>=10){
                                     i=0
@@ -169,15 +171,18 @@
         i=0
         d=[]
         p=[]
-        $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chartdata?crypto_name=BTC", 
+        $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chart-data2?crypto_name=BTC", 
             function (data) {
                 $.each(data.prices, function (key, value) {
+
+                    
                     p.push(value.price)
-                    d.push(value.time.slice(11, 19))
+                    d.push(moment(value.time).format("LTS").slice(0,7))
                     i++
                     if(i>=10){
                         i=0
                         console.log(d)
+                        console.log(p)
                         config.data.labels = d.reverse()
                         config.data.datasets[0].data = p
                         lineChart.update();
@@ -197,21 +202,26 @@
 
     function continue_callback(){
         console.log("k")
-        $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chartdata?crypto_name=BTC", 
+        $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chart-data2?crypto_name=BTC", 
             function (data) {
-                $.each(data.prices, function (key, value) {
-                    // console.log(value.time.slice(11, 19))
+                t = data.prices[0].time.slice(11, 19)
+                v = data.prices[0].price
+                if (d[d.length-1] !== t){
                     config.data.labels.shift();
                     config.data.datasets[0].data.shift();
-                    config.data.labels.push(value.time.slice(11, 19));
-                    config.data.datasets[0].data.push(value.price);
+                    config.data.labels.push(t);
+                    config.data.datasets[0].data.push(v);
                     lineChart.update();
-                    d.push(value)
+                    p.push(v)
+                    d.push(t)
                     console.log(d)
-                    return false
+                    console.log(p)
+                    
+                }
+
                     
                     
-             })
+             
         })
 
     }
