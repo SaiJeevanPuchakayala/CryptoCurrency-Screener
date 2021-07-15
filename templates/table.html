@@ -1,44 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CryptoCurrency Screener</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<link rel="icon" href="{{ url_for('static', filename = 'images/favicon1.png') }}" type="image/icon type">
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/table.css') }}">
-</head> 
+  <title>CryptoCurrency Screener | Table</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Lilita+One|Ubuntu&display=swap" rel="stylesheet">
+  <link rel="icon" href="{{ url_for('static', filename = 'images/favicon1.png') }}" type="image/icon type">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/table.css') }}">
+</head>
 
-<body style="background-color: rgb(48, 143, 221);">
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="{{ url_for('home') }}">CryptoScreener</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+        <li><a href="{{ url_for('home') }}">About</a></li>
+        <li><a href="{{ url_for('home') }}">Features</a></li>
+        <li><a href="{{ url_for('home') }}">News</a></li>
+        </ul>
+    </div>
+    </div>
+</nav>
+
+<div class="jumbotron text-center">
+    <h3>Top 25 CryptoCurrencies By Market Cap</h3> 
+</div>
 
 
-
-    <center><h2 style="margin-top: 100px;"  class="ui icon header">
-        <i class="table icon"></i>
-        <div class="content">
-          Top 25 CryptoCurrencies By Market Cap
-        </div>
-      </h2></center>
-
-    <div style="margin-top: 20px;" class="ui container">
-        <table class="ui selectable inverted table">
-            <thead>
+<!-- (Table Section) -->
+<div class="container-fluid">
+    <div class="table-responsive">
+        <table class="table table-borderless">
+            <thead style="background-color: rgb(183, 200, 218);color:black;">
                 <tr>
-                    <th>Symbol</th>
-                    <th>Name</th>
-                    <th>Price ($)
+                    <th scope="col">Symbol</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price ($)
                     </th>
-                    <th>Change ($)</th>
-                    <th>Change %</th>
-                    <th>Market Cap ($)</th>
+                    <th scope="col">Change ($)</th>
+                    <th scope="col">Change %</th>
+                    <th scope="col">Market Cap ($)</th>
                 </tr>
-
             </thead>
             <tbody id='table'>
-                <div id="loader" class="loader"></div>
+            <div id="loader" class="loader">
             <script>
                 window.onload= refresh
     
@@ -110,10 +129,60 @@
                         console.timeEnd("refresh")
                     })
                 }
-               
             </script>
+            </div>
             </tbody>
         </table>
     </div>
+</div>
+
+
+
+<footer class="container-fluid text-center bg-grey">
+    <a href="#myPage" title="To Top">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+    </a>
+    <p>© Copyright 2021 <a href="#">CryptoCurrency Screener</a></p>
+</footer>
+
+
+<script>
+$(document).ready(function(){
+    // Add smooth scrolling to all links in navbar + footer link
+    $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+        // Prevent default anchor click behavior
+        event.preventDefault();
+
+        // Store hash
+        var hash = this.hash;
+
+        // Using jQuery's animate() method to add smooth page scroll
+        // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+        $('html, body').animate({
+        scrollTop: $(hash).offset().top
+        }, 900, function(){
+    
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+        });
+    } // End if
+    });
+    
+    $(window).scroll(function() {
+    $(".slideanim").each(function(){
+        var pos = $(this).offset().top;
+
+        var winTop = $(window).scrollTop();
+        if (pos < winTop + 600) {
+            $(this).addClass("slide");
+        }
+    });
+    });
+})
+</script>
+
 </body>
 </html>
+    
