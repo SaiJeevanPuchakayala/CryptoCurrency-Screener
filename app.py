@@ -47,7 +47,7 @@ def home():
     s.parse()
     for x in s.news_links:
         news_text_list.append(x.text)
-        news_links_list.append("https://economictimes.indiatimes.com/"+x['href'])
+        news_links_list.append("https://economictimes.indiatimes.com"+x['href'])
     news = list(zip(news_text_list,news_links_list))
     return render_template("index.html",news=list(set(news)))
 
