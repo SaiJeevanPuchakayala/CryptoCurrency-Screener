@@ -2,35 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Real-Time Crypto Currency Price</title>
+    <title>CryptoCurrency Screener | Chart</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lilita+One|Ubuntu&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename = 'images/favicon1.png') }}" type="image/icon type">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/chart.css') }}">
     
 </head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
-<body>
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
-        <div class="row">
-            <div>
-                <h3 id="title">BITCOIN</h3>
-            </div>
-            <hr>
-            <div>
-                   Crypto Currencies: <select id="cryptos">
-                    <option value="" selected="selected">Select Crypto Currency</option>
-                  </select>
-                  
-            </div>
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <canvas id="canvas"></canvas>
-                    </div>
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="{{ url_for('home') }}">CryptoScreener</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+        <li><a href="{{ url_for('home') }}">About</a></li>
+        <li><a href="{{ url_for('home') }}">Features</a></li>
+        <li><a href="{{ url_for('home') }}">News</a></li>
+        </ul>
+    </div>
+    </div>
+</nav>
+
+
+
+<br><br><br>
+<div class="container">
+    <div class="row">
+        <div style="float: left;">
+            <h3 id="title">BITCOIN Price Chart</h3>
+        </div>
+        <div style="float: right;">
+                <h5>Crypto Currencies: </h5><select id="cryptos">
+                <option value="" selected="selected">Select Crypto Currency</option>
+                </select>      
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="canvas"></canvas>
                 </div>
             </div>
         </div>
     </div>
+</div>
 <!--suppress JSUnresolvedLibraryURL -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <!--suppress JSUnresolvedLibraryURL -->
@@ -149,7 +178,7 @@
                     })
 
 
-                    document.getElementById('title').innerText = sel2.toUpperCase()
+                    document.getElementById('title').innerText = sel2.toUpperCase() +" Price Chart"
                    var set_inv2 =  setInterval(function()
                                     {
                                         continue_callback2()
@@ -161,24 +190,44 @@
 
             })
         
-
+        context = document.getElementById('canvas').getContext('2d');
+        var gradient = context.createLinearGradient(0, 0, 0, 600);
+            gradient.addColorStop(0, 'rgba(32, 226, 47, 0.5)');   
+            gradient.addColorStop(0.5, 'rgba(32, 226, 47, 0.3)');
+            gradient.addColorStop(1, 'rgba(32, 226, 47, 0)');
         const config = {
             type: 'line',
             data: {
                 labels: [],
                 datasets: [{
                     label: "Live Price ($)",
-                    backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
+                    // backgroundColor: 'rgb(75, 192, 192)',
+                    // borderColor: 'rgb(75, 192, 192)',
                     data: [],
-                    fill: false,
+                    backgroundColor : gradient, // Put the gradient here as a fill color
+                    borderColor : "rgba(32, 255, 47)",
+                    pointBackgroundColor : "#fff",
+                    pointBorderColor : "rgba(32, 255, 47)",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(32, 255, 47)",
+                    fill: true,
                 }],
             },
             options: {
                 responsive: true,
+                legend: {
+             labels: {
+                  fontColor: '#E1EFF9',
+                  fontSize:14,
+                  fontFamily: "'Roboto Slab', sans-serif",
+                 }
+              },
                 title: {
                     display: true,
-                    text: 'Real-Time Crypto Currency Price Chart'
+                    text: 'Real-Time Cryptocurrency Trends Screener',
+                    fontColor: "#E1EFF9",
+                    fontSize:18,
+                    fontFamily: "'Roboto Slab', sans-serif",
                 },
                 tooltips: {
                     mode: 'index',
@@ -191,23 +240,45 @@
                 scales: {
                     xAxes: [{
                         display: true,
+                        gridLines: {
+                        display: false,
+                        },
                         scaleLabel: {
                             display: true,
-                            labelString: 'Time'
-                        }
+                            labelString: 'Time in Min',
+                            fontFamily: "'Roboto Slab', sans-serif",
+                            fontColor: "#E1EFF9",
+                            fontSize: 16
+
+                        },
+                        ticks: {
+                            fontFamily: "'Roboto Slab', sans-serif",
+                    fontColor: '#F0F3FA',
+                    fontSize: 12
+                },
                     }],
                     yAxes: [{
                         display: true,
+                        gridLines: {
+                        display: true,
+                        color:"#363C4E"
+                        },
                         scaleLabel: {
                             display: true,
-                            labelString: 'Value'
-                        }
+                            labelString: 'Price in $',
+                            fontFamily: "'Roboto Slab', sans-serif",
+                            fontColor: "#E1EFF9",
+                            fontSize: 16
+                        },
+                        ticks: {
+                            fontFamily: "'Roboto Slab', sans-serif",
+                    fontColor: '#F0F3FA',
+                    fontSize: 12
+                },
                     }]
                 }
             }
         };
-
-        context = document.getElementById('canvas').getContext('2d');
 
         lineChart = new Chart(context, config);
 
@@ -380,5 +451,49 @@
 
 </script>
 
+<br><br><br><br><br>
+<footer class="container-fluid text-center bg-grey">
+    <a href="#myPage" title="To Top">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+    </a>
+    <p>© Copyright 2021 <a href="#">CryptoCurrency Screener</a></p>
+</footer>
+
+<script>
+    $(document).ready(function(){
+        // Add smooth scrolling to all links in navbar + footer link
+        $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+        // Make sure this.hash has a value before overriding default behavior
+        if (this.hash !== "") {
+            // Prevent default anchor click behavior
+            event.preventDefault();
+    
+            // Store hash
+            var hash = this.hash;
+    
+            // Using jQuery's animate() method to add smooth page scroll
+            // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+            $('html, body').animate({
+            scrollTop: $(hash).offset().top
+            }, 900, function(){
+        
+            // Add hash (#) to URL when done scrolling (default click behavior)
+            window.location.hash = hash;
+            });
+        } // End if
+        });
+        
+        $(window).scroll(function() {
+        $(".slideanim").each(function(){
+            var pos = $(this).offset().top;
+    
+            var winTop = $(window).scrollTop();
+            if (pos < winTop + 600) {
+                $(this).addClass("slide");
+            }
+        });
+        });
+    })
+</script>
 </body>
 </html>

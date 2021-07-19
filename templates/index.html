@@ -37,8 +37,8 @@
 </nav>
 
 <div class="jumbotron text-center">
-    <h1>CryptoCurrency Screener</h1> 
-    <p>Realtime CryptoCurrency Trends at your finger tips!</p> 
+    <h1>Cryptocurrency Screener</h1> 
+    <p>Realtime Cryptocurrency Trends at your finger tips!</p> 
     <!-- <form>
     <div class="input-group">
         <input type="email" class="form-control" size="50" placeholder="Email Address" required>
@@ -54,8 +54,8 @@
     <div class="row">
     <div class="col-sm-8">
         <h2>About Cryptocurrency Screener</h2><br>
-        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4>
-        <br><button class="btn btn-default btn-lg">Realtime Screener</button>
+        <h4>Cryptocurrency Screener is a cryptocurrency market trends tracker that provides real-time trends of top cryptocurrencies which are listed in order of market capitalization. This screener is equipped with a curated Realtime Price Screener, Stats Table, And top <a href=#portfolio>News Viewer</a> from various sources into a simple, focused format.</h4>
+        <br><a  href="{{ url_for('chart_creator') }}" ><button class="btn btn-default btn-lg">Realtime Screener</button></a>
         <br>
         <br><a  href="{{ url_for('table_creator') }}" ><button class="btn btn-default btn-lg">Top 25 CryptoCurrencies</button></a>
     </div>
@@ -75,17 +75,17 @@
     <div class="col-sm-4">
         <span class="glyphicon glyphicon-time logo-small"></span>
         <h4>RealTime Data</h4>
-        <p>Get your daily dose of 24/7 Realtime data and stay woke</p>
+        <p>Get your daily dose of <br> 24/7 Cryptocurrency trends and stay woke</p>
     </div>
     <div class="col-sm-4">
         <span class="glyphicon glyphicon-screenshot logo-small"></span>
         <h4>Accuracy</h4>
-        <p>Accurate Realtime Data, automatically updated stats and news</p>
+        <p>Accurate Realtime Data, <br> Automatically updated STATS and NEWS</p>
     </div>
     <div class="col-sm-4">
         <span class="glyphicon glyphicon-signal logo-small"></span>
         <h4>Screener</h4>
-        <p>Have a clear visualisation about the trends</p>
+        <p>Have a clear visualisation about <br> the Cryptocurrency trends</p>
     </div>
     </div>
     <br><br>
@@ -106,7 +106,7 @@
 
         {% for new in news%}
         <div class="item">
-        <h4>{{new}}<br><span>- By Our Sources</Source></span></h4>
+        <h4>{{new[0]}}<br><span><a href={{new[1]}} target="_blank"><span class="glyphicon glyphicon-new-window"></span> Read More</a></span></h4>
         </div>
         {% endfor%}
     </div>

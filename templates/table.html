@@ -16,6 +16,16 @@
 
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
+<script>
+    function chooseColour(price) {
+        if (price >= 0) {
+            return "textGreen";
+        } else {
+            return "textRed";
+        }
+    }
+</script>
+
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
     <div class="navbar-header">
@@ -80,10 +90,10 @@
                             cryptos += '<td>' + 
                                 value.price + '</td>';
 
-                            cryptos += '<td>' + 
+                            cryptos += '<td class=' + chooseColour(value.chg) +'>' + 
                                 value.chg + '</td>'; 
 
-                            cryptos += '<td>' + 
+                            cryptos += '<td class=' + chooseColour((value.chg_per).slice(0,-1)) +'>' + 
                                 value.chg_per + '</td>';    
                                 
                             cryptos += '<td>' + 
