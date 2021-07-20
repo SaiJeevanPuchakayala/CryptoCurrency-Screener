@@ -2,14 +2,15 @@ import requests
 from flask import Flask, render_template, request, jsonify
 from bs4 import BeautifulSoup
 import cfscrape
-import temp
 from coinbase.wallet.client import Client
 from coinbase.wallet.model import APIObject
 
 app = Flask("__name__")
 
 scraper = cfscrape.create_scraper()
-client = Client(temp.coinbase_API_key, temp.coinbase_API_secret)
+coinbase_API_key = "iZ93LGIfitxMNZ2S"
+coinbase_API_secret = "sFI3hfJ0uLnj6nq2zi2t0kUtEaa53p4D"
+client = Client(coinbase_API_key, coinbase_API_secret)
 
 
 def _get_soup(url):
