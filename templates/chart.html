@@ -74,16 +74,16 @@
         var keys1 = []
         var sel = "k"
         var keys2 = []
-        var api = "https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chart-data2?crypto_name="
+        var api = "/api/chart-data2?crypto_name="
 
 
-        $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chart-symbols1", 
+        $.getJSON("/api/chart-symbols1", 
             function (data) {
 
                 keys1 = Object.keys(data)
                 j=0
                 keys2 = Object.values(data)
-                console.log(api)
+                
                 var cryptoSel = document.getElementById("cryptos");
                 keys1.forEach(function(x){
                     cryptoSel.options[cryptoSel.options.length] = new Option(keys2[j], x);
@@ -93,9 +93,9 @@
                     sel = this.value
                     sel2 = cryptoSel.options[cryptoSel.selectedIndex].text
                     if (sel2 !== "Select Crypto Currency"){
-                    console.log(sel)
+            
                     api2 = api + sel
-                    console.log(api2)
+                
                     lineChart.destroy()
                     clearInterval(set_inv)
                     clearInterval(set_inv2)
@@ -115,43 +115,37 @@
                         function (data) {
                             ct = moment().format()
                             ct_4 = moment(ct).format("LT").slice(0,-3)
-                            console.log("main")
-                            console.log(ct_4)
+                
                             var dt = moment(ct).subtract(3, 'minutes').format("LT").slice(0,-3)
-                            //console.log(dt)
+                        
                             $.each(data.prices, function (key, value) {
                                 var lt = moment(value.time).format("LT").slice(0,-3)
                                 if (lt === dt && flag===0){
-                                    // console.log("k")
-                                    // console.log(lt)
+                            
                                     p.push(value.price)
                                     d.push(lt)
                                     flag = 1
                                     i++
                                     slt = moment(value.time).subtract(3, 'minutes').format("LT").slice(0,-3)
-                                    //console.log(slt)      
+                                          
                                 }
                                 if (flag === 1 && lt === slt){
-                                    // console.log(i)
-                                    // console.log(lt)
+                                
                                     p.push(value.price)
                                     d.push(lt)
                                     i++
                                     slt = moment(value.time).subtract(3, 'minutes').format("LT").slice(0,-3)
-                                    // console.log(slt)   
+                                  
                                 }
                                 if (i>10){
-                                    console.log(d)
-                                    console.log(p)
+                                    
                                     config.data.labels = d.reverse()
                                     config.data.datasets[0].data = p
                                     lineChart.update();
                                     if(flag===1){
-                                        $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chart", 
+                                        $.getJSON("/api/chart", 
                                             function (data) {
                                                 count++
-                                                console.log("count")
-                                                console.log(count)
                                                 str1 = parseFloat(data[sel].split(",").join(""))
                                                 config.data.labels.shift();
                                                 config.data.datasets[0].data.shift();
@@ -161,8 +155,6 @@
                                                 // p.push(data[sel])
                                                 // d.push(ct_2)
                                                 flag = 0
-                                                console.log(p)
-                                                console.log(d)
                                                 ct = moment(ct).add(3, 'minutes')
                                             })
                                     }
@@ -301,60 +293,49 @@
         var slt = 0
         ct = 0
         var count = 0
-        $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chart-data2?crypto_name=BTC", 
+        $.getJSON("/api/chart-data2?crypto_name=BTC", 
             function (data) {
                 
                 ct = moment().format()
                 ct_2 = moment(ct).format("LT").slice(0,-3)
-                //console.log(ct_2)
                 dt = moment(ct).subtract(3, 'minutes').format("LT").slice(0,-3)
                 
-                //console.log(dt)
                 $.each(data.prices, function (key, value) {
                     var lt = moment(value.time).format("LT").slice(0,-3)
                     
                     if (lt === dt && flag===0){
-                        //console.log("k")
-                        //console.log(lt)
                         p.push(value.price)
                         d.push(lt)
                         flag = 1
                         i++
                         slt = moment(value.time).subtract(3, 'minutes').format("LT").slice(0,-3)
-                        //console.log(slt)      
+      
                     }
                     if (flag === 1 && lt === slt){
-                        // console.log(i)
-                        // console.log(lt)
+
                         p.push(value.price)
                         d.push(lt)
                         i++
-                        slt = moment(value.time).subtract(3, 'minutes').format("LT").slice(0,-3)
-                        //console.log(slt)   
+                        slt = moment(value.time).subtract(3, 'minutes').format("LT").slice(0,-3)  
                     }
                     if (i>10){
-                        //console.log(d)
-                        //console.log(p)
+
                         config.data.labels = d.reverse()
                         config.data.datasets[0].data = p
                         lineChart.update();
                         if(flag===1){
-                            $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chart", 
+                            $.getJSON("/api/chart", 
                                 function (data) {
                                     count++
-                                    console.log("count")
-                                    console.log(count)
+
                                     str1 = parseFloat(data.BTC.split(",").join(""))
                                     config.data.labels.shift();
                                     config.data.datasets[0].data.shift();
                                     config.data.labels.push(ct_2);
                                     config.data.datasets[0].data.push(str1);
                                     lineChart.update();
-                                    // p.push(data.BTC)
-                                    // d.push(ct_2)
                                     flag = 0
-                                    console.log(p)
-                                    console.log(d)
+
                                     ct = moment(ct).add(3, 'minutes')
                                 })
                         }
@@ -380,31 +361,27 @@
 
     function continue_callback(){
         
-        console.log("k")
-        //console.log(ct)
+
         ct_2 = moment(ct).format("LT").slice(0,-3)
-        console.log(ct_2)
+
         if (flag === 0){
             ct_3 = moment().format("LT").slice(0,-3)
-            console.log(ct_3)
+
             if ( ct_3 === ct_2){
-                $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chart", 
+                $.getJSON("/api/chart", 
                 function (data) {
                     count++
-                    console.log("count")
-                    console.log(count)
+                    
                     str1 = parseFloat(data.BTC.split(",").join(""))
                     config.data.labels.shift();
                     config.data.datasets[0].data.shift();
                     config.data.labels.push(ct_2);
                     config.data.datasets[0].data.push(str1);
                     lineChart.update();
-                    // p.push(data.BTC)
-                    // d.push(ct_2)
+
                     flag = 0
                     
-                    console.log(p)
-                    console.log(d)
+
                     
                     ct= moment(ct).add(3, 'minutes')
                 })
@@ -413,32 +390,21 @@
     }
 
     function continue_callback2(){
-        console.log("h")
-        //console.log(sel)
-        //console.log(ct)
         ct_2 = moment(ct).format("LT").slice(0,-3)
-        console.log(ct_2)
         if (flag===0){
             ct_3 = moment().format("LT").slice(0,-3)
-            console.log("infunction")
-            console.log(ct_3)
             if ( ct_3 === ct_2){
-                $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/chart", 
+                $.getJSON("/api/chart", 
                 function (data) {
                     count++
-                    console.log("count")
-                    console.log(count)
                     str1 = parseFloat(data[sel].split(",").join(""))
                     config.data.labels.shift();
                     config.data.datasets[0].data.shift();
                     config.data.labels.push(ct_2);
                     config.data.datasets[0].data.push(str1);
                     lineChart.update();
-                    // p.push(data[sel])
-                    // d.push(ct_2)
                     flag = 0
-                    console.log(p)
-                    console.log(d)
+                    
                     ct= moment(ct).add(3, 'minutes')
                 })
             }
@@ -461,26 +427,23 @@
 
 <script>
     $(document).ready(function(){
-        // Add smooth scrolling to all links in navbar + footer link
+       
         $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
-        // Make sure this.hash has a value before overriding default behavior
+        
         if (this.hash !== "") {
-            // Prevent default anchor click behavior
             event.preventDefault();
     
-            // Store hash
+
             var hash = this.hash;
     
-            // Using jQuery's animate() method to add smooth page scroll
-            // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+
             $('html, body').animate({
             scrollTop: $(hash).offset().top
             }, 900, function(){
         
-            // Add hash (#) to URL when done scrolling (default click behavior)
             window.location.hash = hash;
             });
-        } // End if
+        }
         });
         
         $(window).scroll(function() {

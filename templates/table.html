@@ -73,8 +73,7 @@
     
                 function refresh(){
                     
-                    console.time("load")
-                    $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/table", 
+                    $.getJSON("/api/table", 
                         function (data) {
                         var cryptos = '';
     
@@ -102,23 +101,20 @@
                             cryptos += '</tr>';
     
                         });
-                        console.log('main')
                         document.getElementById("loader").style.visibility = "hidden";
                         $('#table').append(cryptos);
-                        console.timeEnd('load')
                     });
                 }
 
                 setInterval(function()
                     {
                         refresh2()
-                    }, 10000);
+                    }, 5000);
                 ;
 
 
                function refresh2(){
-                    console.time("refresh")
-                    $.getJSON("https://cors.bridged.cc/https://yahoo-crypto-api.herokuapp.com/table", 
+                    $.getJSON("/api/table", 
                             function (data) {
                         
                         var i=0       
@@ -135,8 +131,6 @@
                             
 
                         })
-                        console.log("ref")
-                        console.timeEnd("refresh")
                     })
                 }
             </script>
@@ -145,6 +139,7 @@
         </table>
     </div>
 </div>
+<!-- (Table Section) -->
 
 
 
@@ -158,26 +153,22 @@
 
 <script>
 $(document).ready(function(){
-    // Add smooth scrolling to all links in navbar + footer link
+
     $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
-    // Make sure this.hash has a value before overriding default behavior
     if (this.hash !== "") {
-        // Prevent default anchor click behavior
+
         event.preventDefault();
 
-        // Store hash
         var hash = this.hash;
 
-        // Using jQuery's animate() method to add smooth page scroll
-        // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
         $('html, body').animate({
         scrollTop: $(hash).offset().top
         }, 900, function(){
     
-        // Add hash (#) to URL when done scrolling (default click behavior)
+
         window.location.hash = hash;
         });
-    } // End if
+    } 
     });
     
     $(window).scroll(function() {

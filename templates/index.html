@@ -30,7 +30,7 @@
         <ul class="nav navbar-nav navbar-right">
         <li><a href="#about">About</a></li>
         <li><a href="#services">Features</a></li>
-        <li><a href="#portfolio">News</a></li>
+        <li><a href="#news">News</a></li>
         </ul>
     </div>
     </div>
@@ -54,7 +54,7 @@
     <div class="row">
     <div class="col-sm-8">
         <h2>About Cryptocurrency Screener</h2><br>
-        <h4>Cryptocurrency Screener is a cryptocurrency market trends tracker that provides real-time trends of top cryptocurrencies which are listed in order of market capitalization. This screener is equipped with a curated Realtime Price Screener, Stats Table, And top <a href=#portfolio>News Viewer</a> from various sources into a simple, focused format.</h4>
+        <h4>Cryptocurrency Screener is a cryptocurrency market trends tracker that provides real-time trends of top cryptocurrencies which are listed in order of market capitalization. This screener is equipped with a curated Realtime Price Screener, Stats Table, And top <a href=#news>News Viewer</a> from various sources into a simple, focused format.</h4>
         <br><a  href="{{ url_for('chart_creator') }}" ><button class="btn btn-default btn-lg">Realtime Screener</button></a>
         <br>
         <br><a  href="{{ url_for('table_creator') }}" ><button class="btn btn-default btn-lg">Top 25 CryptoCurrencies</button></a>
@@ -64,6 +64,7 @@
     </div>
     </div>
 </div>
+<!-- (About Section) -->
 
 
 <!-- (Features Section) -->
@@ -90,9 +91,12 @@
     </div>
     <br><br>
 </div>
+<!-- (Features Section) -->
+
+
 
 <!-- (News Section) -->
-<div id="portfolio" class="container-fluid text-center bg-blue">
+<div id="news" class="container-fluid text-center bg-blue">
     <h2>News</h2><br>
 
     <h2>Top Trending News is Here</h2>
@@ -146,6 +150,7 @@
     </div><br>
 
 </div>
+<!-- (News Section) -->
 
 
 
@@ -159,26 +164,23 @@
 
 <script>
 $(document).ready(function(){
-    // Add smooth scrolling to all links in navbar + footer link
+    
     $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
-    // Make sure this.hash has a value before overriding default behavior
+    
     if (this.hash !== "") {
-        // Prevent default anchor click behavior
+        
         event.preventDefault();
 
-        // Store hash
+        
         var hash = this.hash;
 
-        // Using jQuery's animate() method to add smooth page scroll
-        // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
         $('html, body').animate({
         scrollTop: $(hash).offset().top
         }, 900, function(){
     
-        // Add hash (#) to URL when done scrolling (default click behavior)
         window.location.hash = hash;
         });
-    } // End if
+    }
     });
     
     $(window).scroll(function() {
