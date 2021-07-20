@@ -7,7 +7,7 @@
 
 The purpose of this project is to simplify things for cryptocurrency enthusiast by providing real-time trends of top cryptocurrencies which are listed in order of market capitalization. This Cryptocurrency Screener is equipped with a curated Realtime Price Screener, Stats Table, And top News Viewer from various sources into a simple, focused format.
 
-##### The logic behind the project is simple
+#### The logic behind the project is simple
 
 * Do web scraping from popular Indian news sites and pick up news only related to live cryptocurrency market.
 
@@ -21,5 +21,5 @@ The purpose of this project is to simplify things for cryptocurrency enthusiast 
 
 > NOTE: If you want to try it in your localhost, install Flask and open the folder in a virtual env
 
-##### Scope for improvement : If you are interested feel free to do a PR and make the screener chart responsive, and add more cryptocurrencies to stats table as well as screener chart :)
+#### Scope for improvement : If you are interested feel free to do a PR and make the screener chart responsive, and add more cryptocurrencies to stats table as well as screener chart :)
 
