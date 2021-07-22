@@ -18,7 +18,7 @@
 
 <script>
     function chooseColour(price) {
-        if (price >= 0) {
+        if (price.replace(",","") >= 0) {
             return "textGreen";
         } else {
             return "textRed";
