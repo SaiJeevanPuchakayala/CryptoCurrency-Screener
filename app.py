@@ -9,8 +9,8 @@ from coinbase.wallet.model import APIObject
 app = Flask("__name__")
 
 scraper = cfscrape.create_scraper()
-coinbase_API_key = config.coinbase_API_key
-coinbase_API_secret = config.coinbase_API_secret
+coinbase_API_key = "iZ93LGIfitxMNZ2S"
+coinbase_API_secret = "sFI3hfJ0uLnj6nq2zi2t0kUtEaa53p4D"
 client = Client(coinbase_API_key, coinbase_API_secret)
 
 
