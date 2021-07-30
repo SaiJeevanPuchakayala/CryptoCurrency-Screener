@@ -2,14 +2,15 @@ import requests
 from flask import Flask, render_template, request, jsonify
 from bs4 import BeautifulSoup
 import cfscrape
+import config
 from coinbase.wallet.client import Client
 from coinbase.wallet.model import APIObject
 
 app = Flask("__name__")
 
 scraper = cfscrape.create_scraper()
-coinbase_API_key = "iZ93LGIfitxMNZ2S"
-coinbase_API_secret = "sFI3hfJ0uLnj6nq2zi2t0kUtEaa53p4D"
+coinbase_API_key = config.coinbase_API_key
+coinbase_API_secret = config.coinbase_API_secret
 client = Client(coinbase_API_key, coinbase_API_secret)
 
 
@@ -87,7 +88,7 @@ def get_cryptos_table():
 
     table_currency = [{
         "symbol":td.select("td")[0].select("img")[0]['src'],
-        "name":td.select("td")[1].text,
+        "name":td.select("td")[1].text.replace(" USD",""),
         "price":td.select("td")[2].text,
         "chg":td.select("td")[3].text,
         "chg_per":td.select("td")[4].text,
