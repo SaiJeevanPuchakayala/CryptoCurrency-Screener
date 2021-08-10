@@ -12,19 +12,25 @@
   <link href="https://fonts.googleapis.com/css?family=Lilita+One|Ubuntu&display=swap" rel="stylesheet">
   <link rel="icon" href="{{ url_for('static', filename = 'images/favicon1.png') }}" type="image/icon type">
   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/table.css') }}">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+  <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap.min.js"></script>
+
+
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css">
+
+
+  <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap.min.js"></script>
+  <script src="https://cdn.datatables.net/fixedcolumns/3.3.3/js/dataTables.fixedColumns.min.js"></script>
 </head>
 
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
-
-<script>
-    function chooseColour(price) {
-        if (price.replace(",","") >= 0) {
-            return "textGreen";
-        } else {
-            return "textRed";
-        }
-    }
-</script>
 
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -47,99 +53,88 @@
 </nav>
 
 <div class="jumbotron text-center">
-    <h3>Top 25 CryptoCurrencies By Market Cap</h3> 
+    <h3>Top 100 CryptoCurrencies By Market Cap</h3> 
 </div>
 
 
 <!-- (Table Section) -->
 <div class="container-fluid">
-    <div class="table-responsive">
-        <table class="table table-borderless">
+        <table id="example" class="table nowrap" style="width: 100%;">
             <thead style="background-color: rgb(183, 200, 218);color:black;">
                 <tr>
-                    <th scope="col">Symbol</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Price ($)
+                    <th>Icon</th>
+                    <th>Name</th>
+                    <th>Symbol</th>
+                    <th>Price ($)
                     </th>
-                    <th scope="col">Change ($)</th>
-                    <th scope="col">Change %</th>
-                    <th scope="col">Market Cap ($)</th>
+                    <th>Change ($)</th>
+                    <th>Change %</th>
+                    <th>Market Cap ($)</th>
                 </tr>
             </thead>
-            <tbody id='table'>
-            <div id="loader" class="loader">
-            <script>
-                window.onload= refresh
-    
-                function refresh(){
-                    
-                    $.getJSON("/api/table", 
-                        function (data) {
-                        var cryptos = '';
-    
-                        $.each(data, function (key, value) {
-    
-                            cryptos += '<tr>';
-                            cryptos += '<td>' + 
-                                '<img src='+value.symbol+'>' + '</td>';
-    
-                            cryptos += '<td>' + 
-                                value.name + '</td>';
-
-                            cryptos += '<td>' + 
-                                value.price + '</td>';
-
-                            cryptos += '<td class=' + chooseColour(value.chg) +'>' + 
-                                value.chg + '</td>'; 
-
-                            cryptos += '<td class=' + chooseColour((value.chg_per).slice(0,-1)) +'>' + 
-                                value.chg_per + '</td>';    
-                                
-                            cryptos += '<td>' + 
-                                value.market_cap + '</td>';
-
-                            cryptos += '</tr>';
-    
-                        });
-                        document.getElementById("loader").style.visibility = "hidden";
-                        $('#table').append(cryptos);
-                    });
-                }
-
-                setInterval(function()
-                    {
-                        refresh2()
-                    }, 5000);
-                ;
-
-
-               function refresh2(){
-                    $.getJSON("/api/table", 
-                            function (data) {
-                        
-                        var i=0       
-                        $.each(data, function (key, value) {
-                            var x = document.getElementById('table')
-                            var y = x.rows.item(i).cells
-                            y.item(2).innerHTML = value.symbol
-                            y.item(2).innerHTML = value.name
-                            y.item(2).innerHTML = value.price
-                            y.item(3).innerHTML = value.chg
-                            y.item(4).innerHTML = value.chg_per
-                            y.item(5).innerHTML = value.market_cap
-                            i++
-                            
-
-                        })
-                    })
-                }
-            </script>
-            </div>
-            </tbody>
         </table>
-    </div>
 </div>
 <!-- (Table Section) -->
+
+<script>
+$(document).ready(function() {
+    $('#example').DataTable({
+        // "responsive": true,
+        "fixedColumns": true,
+        "lengthMenu": [25, 50, 75, 100],
+        "pageLength": 25,
+        "order": [[ 3, "desc" ]],
+        "ajax": {
+            "url": "api/table",
+            "dataSrc": ""
+        },
+
+
+        "columns": [
+            { "data": "icon",
+            "render": function(data, type, row) {
+        return '<img src="'+data+'" />';
+    } },
+            { "data": "name" },
+            { "data": "symbol",
+            render: function ( data, type, row ) {
+        return data.replace(/[0-9]/g, "");
+    } },
+            { "data": "price" },
+            { "data": "chg" },
+            { "data": "chg_per" },
+            { "data": "market_cap" }
+        ],
+
+
+        "columnDefs": [ {
+            "targets": [-2,-3],
+            "createdCell": function (td, cellData, rowData, row, col) {
+            if ( cellData.replace(",","") >= 0 ) {
+                $(td).css('color', 'rgb(47, 255, 82)')
+            }
+            else {
+                $(td).css('color', 'rgb(255, 24, 24)')
+            }
+                }
+        } ],
+
+
+        });
+
+        
+setInterval( function () {
+    $('#example').DataTable().ajax.reload(null, false);
+}, 5000 );
+
+
+} );
+
+// setInterval( function () {
+//     $('#example').DataTable().ajax.reload(null, false);
+// }, 5000 );
+</script>
+
 
 
 

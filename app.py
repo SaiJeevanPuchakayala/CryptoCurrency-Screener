@@ -82,16 +82,17 @@ def chart_creator():
 @app.route('/api/table')
 def get_cryptos_table():
 
-    base_url = "https://finance.yahoo.com/cryptocurrencies"
+    base_url = "https://finance.yahoo.com/cryptocurrencies?offset=0&count=100"
     soup = _get_soup(base_url)
     currency_rows = soup.select("table tbody tr")
 
     table_currency = [{
-        "symbol":td.select("td")[0].select("img")[0]['src'],
+        "icon":td.select("td")[0].select("img")[0]['src'],
+        "symbol":td.select("td")[0].select("a")[0].text.replace("-USD",""),
         "name":td.select("td")[1].text.replace(" USD",""),
         "price":td.select("td")[2].text,
         "chg":td.select("td")[3].text,
-        "chg_per":td.select("td")[4].text,
+        "chg_per":td.select("td")[4].text.replace("%",""),
         "market_cap":td.select("td")[5].text
     } for td in currency_rows]
 
@@ -187,6 +188,95 @@ def get_historic_data():
     data = client._make_api_object(client._get('v2', 'prices', f'{input_code}-USD', 'historic'), APIObject)
 
     return jsonify(data)
+
+
+@app.route("/overview/<crypto_name>")
+def crypto_overview(crypto_name):
+    return render_template("overview.html")
+
+
+
+@app.route('/api/overview/<crypto_name>')
+def crypto_overview_scraper(crypto_name):
+    YAHOO_CRYPTOCURRENCY_OVERVIEW_URL = f"https://finance.yahoo.com/quote/{crypto_name}-USD"
+    crypto_overview_soup = _get_soup(YAHOO_CRYPTOCURRENCY_OVERVIEW_URL)
+    crypto_overview_data = {
+        'currency_name': "-",
+        'currency_price': "-",
+        'change': "-",
+        'previous_close': "-",
+        'open_at': "-",
+        'days_range': "-",
+        'week_range': "-",
+        'start_date': "-",
+        'algorithm': "-",
+        'marketCapture': "-",
+        'circulating_supply': "-",
+        'max_supply': "-",
+        'volume': "-",
+        'volume_24_hrs': "-",
+        'volume_24_hrs_all_currencies': "-",
+    }
+    try:
+
+        response = crypto_overview_soup
+
+        currency_name = response.select(
+            'div#quote-header-info div:nth-child(2) div:nth-child(1) div h1')[0].text
+        currency_price = response.select(
+            'div#quote-header-info div:nth-child(3) div:nth-child(1) span')[0].text
+        change_change_perc = response.select(
+            'div#quote-header-info div:nth-child(3) div:nth-child(1) span')[1].text
+
+        previous_close = response.select(
+            'div#quote-summary div table > tbody > tr:nth-child(1) > td:nth-child(2) span')[0].text
+        open_at = response.select(
+            'div#quote-summary div table > tbody > tr:nth-child(2) > td:nth-child(2) span')[0].text
+        days_range = response.select(
+            'div#quote-summary div table > tbody > tr:nth-child(3) > td:nth-child(2)')[0].text
+        week_range = response.select(
+            'div#quote-summary div table > tbody > tr:nth-child(4) > td:nth-child(2)')[0].text
+        start_date = response.select(
+            'div#quote-summary div table > tbody > tr:nth-child(5) > td:nth-child(2) span')[0].text
+        algorithm = response.select(
+            'div#quote-summary div table > tbody > tr:nth-child(6) > td:nth-child(2) span')[0].text
+
+        right_table = response.select('div#quote-summary div')[1]
+
+        market_capture = right_table.select(
+            'table > tbody > tr:nth-child(1) > td:nth-child(2) span')[0].text
+        circulating_supply = right_table.select(
+            'table > tbody > tr:nth-child(2) > td:nth-child(2) span')[0].text
+        max_supply = right_table.select(
+            'table > tbody > tr:nth-child(3) > td:nth-child(2) span')[0].text
+        volume = right_table.select(
+            'table > tbody > tr:nth-child(4) > td:nth-child(2) span')[0].text
+        volume_24 = right_table.select(
+            'table > tbody > tr:nth-child(5) > td:nth-child(2)')[0].text
+        volume_all_curre = right_table.select(
+            'table > tbody > tr:nth-child(6) > td:nth-child(2)')[0].text
+
+        crypto_overview_data = {
+            'currency_name': currency_name,
+            'currency_price': currency_price,
+            'change': change_change_perc,
+            'previous_close': previous_close,
+            'open_at': open_at,
+            'days_range': days_range,
+            'week_range': week_range,
+            'start_date': start_date,
+            'algorithm': algorithm,
+            'marketCapture': market_capture,
+            'circulating_supply': circulating_supply,
+            'max_supply': max_supply,
+            'volume': volume,
+            'volume_24_hrs': volume_24,
+            'volume_24_hrs_all_currencies': volume_all_curre
+        }
+    except Exception:
+        pass
+
+    return jsonify(crypto_overview_data)
 
 if __name__=='__main__':
     app.run(debug=True)

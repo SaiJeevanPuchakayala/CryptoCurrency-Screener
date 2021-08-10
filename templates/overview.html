@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>CryptoCurrency Screener | Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Lilita+One|Ubuntu&display=swap" rel="stylesheet">
+  <script type = "text/javascript" 
+  src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+</script>
+  <link rel="icon" href="{{ url_for('static', filename = 'images/favicon1.png') }}" type="image/icon type">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/overview.css') }}">
+</head>
+
+<style>
+  .tradingview-widget-container div div {
+     height: 610px;
+  }
+  @media (max-width: 767px) {
+    .tradingview-widget-container div div {
+        height: 550px;
+     }
+  }
+  @media (max-width: 420px) {
+    .tradingview-widget-container div div {
+        height: 320px;
+     }
+  }
+
+</style>
+
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="#myPage">CryptoScreener</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Features</a></li>
+        <li><a href="#news">News</a></li>
+        </ul>
+    </div>
+    </div>
+</nav>
+
+
+
+<script>
+function overview() {
+var cryptoname = window.location.pathname.split('/')[2]
+var arr = [];
+$.getJSON("/api/overview/"+cryptoname, function(data) {
+   arr = data;
+   document.getElementById("name").innerHTML = arr.currency_name;
+   document.getElementById("price").innerHTML = arr.currency_price;
+   document.getElementById("change_chg_percent").innerHTML = arr.change;
+
+
+   var chg = arr.change;
+    if (chg.includes("+")) {
+      var myElement = document.querySelector('#change_chg_percent');
+      myElement.classList.add('textGreen');
+    }
+    else {
+      var myElement = document.querySelector('#change_chg_percent');
+      myElement.classList.add('textRed');
+    }
+
+
+
+   document.getElementById("previous_close").innerHTML = arr.previous_close;
+   document.getElementById("open_value").innerHTML = arr.open_at;
+   document.getElementById("day_range").innerHTML = arr.days_range;
+   document.getElementById("week_range").innerHTML = arr.week_range;
+   document.getElementById("start_date").innerHTML = arr.start_date;
+   document.getElementById("algorithm").innerHTML = arr.algorithm;
+   document.getElementById("market_cap").innerHTML = arr.marketCapture;
+   document.getElementById("circulating_supply").innerHTML = arr.circulating_supply;
+   document.getElementById("max_supply").innerHTML = arr.max_supply;
+   document.getElementById("volume").innerHTML = arr.volume;
+   document.getElementById("volume_24").innerHTML = arr.volume_24_hrs;
+   document.getElementById("volume_all").innerHTML = arr.volume_24_hrs_all_currencies;
+});
+}
+setInterval(overview,5000)
+</script>
+
+
+<div class="jumbotron text-center">
+    <h1 id="name"></h1> 
+    <h2 id="price"></h2>
+    <p style="background-color: #262B3E;background: radius 10px;" id="change_chg_percent"></p> 
+</div>
+
+<br><br>
+
+<!-- (About Section) -->
+<div id="about" class="container p-3 my-3 bg-dark text-white">
+        <table class="table">
+            <tbody>
+              <tr>
+                <td>Previous Close</td>
+                <td id="previous_close"></td>
+              </tr>
+              <tr>
+                <td>Open</td>
+                <td id="open_value"></td>
+              </tr>
+              <tr>
+                <td>Day's Range</td>
+                <td id="day_range"></td>
+              </tr>
+              <tr>
+                <td>52 Week Range</td>
+                <td id="week_range"></td>
+              </tr>
+              <tr>
+                <td>Start Date</td>
+                <td id="start_date"></td>
+              </tr>
+              <tr>
+                <td>Algorithm</td>
+                <td id="algorithm"></td>
+              </tr>
+              <tr>
+                <td>Market Cap</td>
+                <td id="market_cap"></td>
+              </tr>
+
+              <tr>
+                <td>Circulating Supply</td>
+                <td id="circulating_supply"></td>
+              </tr>
+
+              <tr>
+                <td>Max Supply</td>
+                <td id="max_supply"></td>
+              </tr>
+
+              <tr>
+                <td>Volume</td>
+                <td id="volume"></td>
+              </tr>
+
+              <tr>
+                <td>Volume (24hr)</td>
+                <td id="volume_24"></td>
+              </tr>
+
+
+              <tr>
+                <td>Volume (24hr) All Currencies</td>
+                <td id="volume_all">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    </div>
+
+</div>
+<!-- (About Section) -->
+
+<br><br>
+
+
+
+<div style="margin-top:10px;" class="container p-3 my-3 bg-dark text-white">
+  <!-- TradingView Widget BEGIN -->
+  <div class="tradingview-widget-container">
+    <div id="tradingview_bfae8"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script type="text/javascript">
+    var cryptoname = window.location.pathname.split('/')[2].replace(/[0-9]/g, "")
+    new TradingView.widget(
+    {
+    "width": "100%",
+    "symbol": cryptoname+"USD",
+    "interval": "1",
+    "timezone": "Asia/Kolkata",
+    "theme": "dark",
+    "style": "3",
+    "locale": "in",
+    "toolbar_bg": "#f1f3f6",
+    "enable_publishing": false,
+    "allow_symbol_change": true,
+    "container_id": "tradingview_bfae8"
+  }
+    );
+    </script>
+  </div>
+  <!-- TradingView Widget END -->
+</div>
+
+<br><br><br>
+
+
+<footer class="container-fluid text-center bg-grey">
+    <a href="#myPage" title="To Top">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+    </a>
+    <p>© Copyright 2021 <a href="https://github.com/SaiJeevanPuchakayala/CryptoCurrency-Screener">CryptoCurrency Screener</a></p>
+</footer>
+
+
+<script>
+$(document).ready(function(){
+    
+    $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+    
+    if (this.hash !== "") {
+        
+        event.preventDefault();
+
+        
+        var hash = this.hash;
+
+        $('html, body').animate({
+        scrollTop: $(hash).offset().top
+        }, 900, function(){
+    
+        window.location.hash = hash;
+        });
+    }
+    });
+    
+    $(window).scroll(function() {
+    $(".slideanim").each(function(){
+        var pos = $(this).offset().top;
+
+        var winTop = $(window).scrollTop();
+        if (pos < winTop + 600) {
+            $(this).addClass("slide");
+        }
+    });
+    });
+})
+</script>
+
+</body>
+</html>
+    
