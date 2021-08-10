@@ -2,7 +2,6 @@ import requests
 from flask import Flask, render_template, request, jsonify
 from bs4 import BeautifulSoup
 import cfscrape
-import config
 from coinbase.wallet.client import Client
 from coinbase.wallet.model import APIObject
 
