@@ -16,9 +16,11 @@ img{
 body {
     font: 400 15px  "Lilita One";
     line-height: 1.8;
-    color:white;
+    color: #818181;
     background-color: #262B3E;
-  }
+ }
+
+
 h2 {
 font-size: 40px;
 text-transform: uppercase;
@@ -203,4 +205,34 @@ visibility: visible;
   
 .textGreen {
 color: rgb(47, 255, 82);
+}
+
+.content{
+    display: none;
+}
+.loader{
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: #16191e;
+    position: absolute;
+}
+.loader>div{
+    height: 100px;
+    width: 100px;
+    border: 15px solid #45474b;
+    border-top-color: #2a88e6;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 50%;
+    animation: spin 1.5s infinite linear;
+}
+@keyframes spin{
+    100%{
+        transform: rotate(360deg);
+    }
 }

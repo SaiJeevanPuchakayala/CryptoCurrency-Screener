@@ -53,18 +53,18 @@
 </nav>
 
 <div class="jumbotron text-center">
-    <h3>Top 100 CryptoCurrencies By Market Cap</h3> 
+    <h3>Top 100 CryptoCurrencies By Latest Price</h3> 
 </div>
 
 
 <!-- (Table Section) -->
 <div class="container-fluid">
-        <table id="example" class="table nowrap" style="width: 100%;">
+        <table id="example" class="table row-border nowrap" style="width: 100%;">
             <thead style="background-color: rgb(183, 200, 218);color:black;">
                 <tr>
-                    <th>Icon</th>
-                    <th>Name</th>
+                    <th></th>
                     <th>Symbol</th>
+                    <th>Name</th>
                     <th>Price ($)
                     </th>
                     <th>Change ($)</th>
@@ -79,8 +79,9 @@
 <script>
 $(document).ready(function() {
     $('#example').DataTable({
-        // "responsive": true,
-        "fixedColumns": true,
+        "responsive": true,
+        "bPaginate": true,
+    "bLengthChange": false,
         "lengthMenu": [25, 50, 75, 100],
         "pageLength": 25,
         "order": [[ 3, "desc" ]],
@@ -95,11 +96,11 @@ $(document).ready(function() {
             "render": function(data, type, row) {
         return '<img src="'+data+'" />';
     } },
-            { "data": "name" },
             { "data": "symbol",
             render: function ( data, type, row ) {
-        return data.replace(/[0-9]/g, "");
+        return '<a target="_blank" href="/overview/'+data+'" />'+data.replace(/[0-9]/g, "")+'</a>';
     } },
+            { "data": "name" },
             { "data": "price" },
             { "data": "chg" },
             { "data": "chg_per" },
@@ -125,7 +126,7 @@ $(document).ready(function() {
         
 setInterval( function () {
     $('#example').DataTable().ajax.reload(null, false);
-}, 5000 );
+}, 10000 );
 
 
 } );

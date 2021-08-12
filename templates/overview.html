@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>CryptoCurrency Screener | Home</title>
+  <title>CryptoCurrency Screener | overview</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -13,6 +13,7 @@
   <script type = "text/javascript" 
   src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="icon" href="{{ url_for('static', filename = 'images/favicon1.png') }}" type="image/icon type">
   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/overview.css') }}">
 </head>
@@ -36,7 +37,11 @@
 
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
+<div class="loader">
+    <div></div>
+</div>
 
+<div class="content">
 
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -50,14 +55,13 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Features</a></li>
-        <li><a href="#news">News</a></li>
+          <li><a href="{{ url_for('home') }}">Home</a></li>
+          <li><a href="{{ url_for('chart_creator') }}">Screener</a></li>
+          <li><a href="{{ url_for('table_creator') }}">Stats</a></li>
         </ul>
     </div>
     </div>
 </nav>
-
 
 
 <script>
@@ -110,7 +114,7 @@ setInterval(overview,5000)
 <br><br>
 
 <!-- (About Section) -->
-<div id="about" class="container p-3 my-3 bg-dark text-white">
+<div id="about" class="container p-3 my-3" style="color: white;">
         <table class="table">
             <tbody>
               <tr>
@@ -170,11 +174,9 @@ setInterval(overview,5000)
               </tr>
             </tbody>
           </table>
-    </div>
-    </div>
-
 </div>
 <!-- (About Section) -->
+
 
 <br><br>
 
@@ -206,6 +208,8 @@ setInterval(overview,5000)
   </div>
   <!-- TradingView Widget END -->
 </div>
+
+
 
 <br><br><br>
 
@@ -251,6 +255,24 @@ $(document).ready(function(){
     });
 })
 </script>
+
+
+</div>
+
+<script>
+
+$(window).on('load', function(){
+  setTimeout(removeLoader, 5000);
+});
+
+function removeLoader(){
+    $( ".loader" ).fadeOut(1000, function() {
+      $( ".loader" ).remove();
+      $(".content").fadeIn();
+  });  
+}
+</script>
+
 
 </body>
 </html>
