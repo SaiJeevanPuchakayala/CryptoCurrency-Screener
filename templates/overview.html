@@ -51,7 +51,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
         </button>
-        <a class="navbar-brand" href="#myPage">CryptoScreener</a>
+        <a class="navbar-brand" href="{{ url_for('home') }}">CryptoScreener</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
@@ -106,9 +106,9 @@ setInterval(overview,5000)
 
 
 <div class="jumbotron text-center">
-    <h1 id="name"></h1> 
-    <h2 id="price"></h2>
-    <p style="background-color: #262B3E;background: radius 10px;" id="change_chg_percent"></p> 
+    <h1 id="name">-</h1> 
+    <h2 id="price">-</h2>
+    <p style="background-color: #262B3E;background: radius 10px;" id="change_chg_percent">-</p> 
 </div>
 
 <br><br>
@@ -119,57 +119,57 @@ setInterval(overview,5000)
             <tbody>
               <tr>
                 <td>Previous Close</td>
-                <td id="previous_close"></td>
+                <td id="previous_close">-</td>
               </tr>
               <tr>
                 <td>Open</td>
-                <td id="open_value"></td>
+                <td id="open_value">-</td>
               </tr>
               <tr>
                 <td>Day's Range</td>
-                <td id="day_range"></td>
+                <td id="day_range">-</td>
               </tr>
               <tr>
                 <td>52 Week Range</td>
-                <td id="week_range"></td>
+                <td id="week_range">-</td>
               </tr>
               <tr>
                 <td>Start Date</td>
-                <td id="start_date"></td>
+                <td id="start_date">-</td>
               </tr>
               <tr>
                 <td>Algorithm</td>
-                <td id="algorithm"></td>
+                <td id="algorithm">-</td>
               </tr>
               <tr>
                 <td>Market Cap</td>
-                <td id="market_cap"></td>
+                <td id="market_cap">-</td>
               </tr>
 
               <tr>
                 <td>Circulating Supply</td>
-                <td id="circulating_supply"></td>
+                <td id="circulating_supply">-</td>
               </tr>
 
               <tr>
                 <td>Max Supply</td>
-                <td id="max_supply"></td>
+                <td id="max_supply">-</td>
               </tr>
 
               <tr>
                 <td>Volume</td>
-                <td id="volume"></td>
+                <td id="volume">-</td>
               </tr>
 
               <tr>
                 <td>Volume (24hr)</td>
-                <td id="volume_24"></td>
+                <td id="volume_24">-</td>
               </tr>
 
 
               <tr>
                 <td>Volume (24hr) All Currencies</td>
-                <td id="volume_all">
+                <td id="volume_all">-
                 </td>
               </tr>
             </tbody>
