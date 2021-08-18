@@ -53,7 +53,7 @@
 </nav>
 
 <div class="jumbotron text-center">
-    <h3>Top 100 CryptoCurrencies By Latest Price</h3> 
+    <h3>Top Trending CryptoCurrencies</h3> 
 </div>
 
 
@@ -99,7 +99,7 @@ $(document).ready(function() {
     } },
             { "data": "symbol",
             render: function ( data, type, row ) {
-        return '<a target="_blank" href="/overview/'+data+'" />'+data.replace(/[0-9]/g, "")+'</a>';
+        return '<a target="_blank" href="/overview/'+data+'" />'+data.replace(/[0-9]/g, "")+'&nbsp;<span class="glyphicon glyphicon-new-window"></span>'+'</a>';
     } },
             { "data": "name" },
             { "data": "price" },
