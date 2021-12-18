@@ -68,14 +68,14 @@
 function overview() {
 var cryptoname = window.location.pathname.split('/')[2]
 var arr = [];
-$.getJSON("/api/overview/"+cryptoname, function(data) {
-   arr = data;
-   document.getElementById("name").innerHTML = arr.currency_name;
-   document.getElementById("price").innerHTML = arr.currency_price;
-   document.getElementById("change_chg_percent").innerHTML = arr.change;
+$.getJSON("https://query1.finance.yahoo.com/v7/finance/quote?formatted=true&symbols="+cryptoname+"-USD&fields=startDate,regularMarketOpen,shortName,regularMarketChange,regularMarketChangePercent,regularMarketPrice,regularMarketTime,circulatingSupply,ask,askSize,bid,bidSize,dayHigh,dayLow,regularMarketDayHigh,regularMarketDayLow,regularMarketVolume,volume,quoteType,marketCap,volume24Hr,volumeAllCurrencies", function(data) {
+   arr = data['quoteResponse']['result'];
+   document.getElementById("name").innerHTML = arr[0].shortName;
+   document.getElementById("price").innerHTML = arr[0].regularMarketPrice['fmt'];
+   document.getElementById("change_chg_percent").innerHTML = arr[0].regularMarketChange['fmt']+" "+"("+arr[0].regularMarketChangePercent['fmt']+")";
 
 
-   var chg = arr.change;
+   var chg = arr[0].regularMarketChange['fmt'];
     if (chg.includes("+")) {
       var myElement = document.querySelector('#change_chg_percent');
       myElement.classList.add('textGreen');
@@ -85,23 +85,19 @@ $.getJSON("/api/overview/"+cryptoname, function(data) {
       myElement.classList.add('textRed');
     }
 
-
-
-   document.getElementById("previous_close").innerHTML = arr.previous_close;
-   document.getElementById("open_value").innerHTML = arr.open_at;
-   document.getElementById("day_range").innerHTML = arr.days_range;
-   document.getElementById("week_range").innerHTML = arr.week_range;
-   document.getElementById("start_date").innerHTML = arr.start_date;
-   document.getElementById("algorithm").innerHTML = arr.algorithm;
-   document.getElementById("market_cap").innerHTML = arr.marketCapture;
-   document.getElementById("circulating_supply").innerHTML = arr.circulating_supply;
-   document.getElementById("max_supply").innerHTML = arr.max_supply;
-   document.getElementById("volume").innerHTML = arr.volume;
-   document.getElementById("volume_24").innerHTML = arr.volume_24_hrs;
-   document.getElementById("volume_all").innerHTML = arr.volume_24_hrs_all_currencies;
+   document.getElementById("previous_close").innerHTML = arr[0].regularMarketPreviousClose['fmt'];
+   document.getElementById("open_value").innerHTML = arr[0].regularMarketOpen['fmt'];
+   document.getElementById("day_range").innerHTML = arr[0].regularMarketDayRange['fmt'];
+   document.getElementById("week_range").innerHTML = arr[0].fiftyTwoWeekRange['fmt'];
+   document.getElementById("start_date").innerHTML = arr[0].startDate['fmt'];
+   document.getElementById("market_cap").innerHTML = arr[0].marketCap['fmt'];
+   document.getElementById("circulating_supply").innerHTML = arr[0].circulatingSupply['fmt'];
+   document.getElementById("volume").innerHTML = arr[0].regularMarketVolume['fmt'];
+   document.getElementById("volume_24").innerHTML = arr[0].volume24Hr['fmt'];
+   document.getElementById("volume_all").innerHTML = arr[0].volumeAllCurrencies['fmt'];
 });
 }
-setInterval(overview,5000)
+setInterval(overview,3000)
 </script>
 
 
@@ -138,10 +134,6 @@ setInterval(overview,5000)
                 <td id="start_date">-</td>
               </tr>
               <tr>
-                <td>Algorithm</td>
-                <td id="algorithm">-</td>
-              </tr>
-              <tr>
                 <td>Market Cap</td>
                 <td id="market_cap">-</td>
               </tr>
@@ -149,11 +141,6 @@ setInterval(overview,5000)
               <tr>
                 <td>Circulating Supply</td>
                 <td id="circulating_supply">-</td>
-              </tr>
-
-              <tr>
-                <td>Max Supply</td>
-                <td id="max_supply">-</td>
               </tr>
 
               <tr>
