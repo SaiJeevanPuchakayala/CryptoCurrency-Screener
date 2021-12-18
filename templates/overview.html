@@ -76,13 +76,13 @@ $.getJSON("https://query1.finance.yahoo.com/v7/finance/quote?formatted=true&symb
 
 
    var chg = arr[0].regularMarketChange['fmt'];
-    if (chg.includes("+")) {
+    if (chg.includes("-")) {
       var myElement = document.querySelector('#change_chg_percent');
-      myElement.classList.add('textGreen');
+      myElement.classList.add('textRed');
     }
     else {
       var myElement = document.querySelector('#change_chg_percent');
-      myElement.classList.add('textRed');
+      myElement.classList.add('textGreen');
     }
 
    document.getElementById("previous_close").innerHTML = arr[0].regularMarketPreviousClose['fmt'];
