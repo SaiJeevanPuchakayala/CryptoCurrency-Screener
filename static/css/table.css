@@ -196,3 +196,9 @@ visibility: visible;
 a {
   color: #3498db;
 }
+
+img {
+  max-width: 30%;
+  max-height: 30%;
+ }
+ 
