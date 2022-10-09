@@ -1,193 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>CryptoCurrency Screener | Home</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Lilita+One|Ubuntu&display=swap" rel="stylesheet">
-  <link rel="icon" href="{{ url_for('static', filename = 'images/favicon1.png') }}" type="image/icon type">
-  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/index.css') }}">
+    <title>CryptoCurrency Screener | Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lilita+One|Ubuntu&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename = 'images/favicon1.png') }}" type="image/icon type">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/index.css') }}">
 </head>
 
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-        </button>
-        <a class="navbar-brand" href="#myPage">CryptoScreener</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav navbar-right">
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Features</a></li>
-        <li><a href="#news">News</a></li>
-        </ul>
-    </div>
-    </div>
-</nav>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#myPage">CryptoScreener</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Features</a></li>
+                    <li><a href="#news">News</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-<div class="jumbotron text-center">
-    <h1>Cryptocurrency Screener</h1> 
-    <p>Realtime Cryptocurrency Trends at your finger tips!</p> 
-</div>
+    <div class="jumbotron text-center">
+        <h1>Cryptocurrency Screener</h1>
+        <p>Realtime Cryptocurrency Trends at your finger tips!</p>
+    </div>
 
-<!-- (About Section) -->
-<div id="about" class="container-fluid">
-    <div class="row">
-    <div class="col-sm-8">
-        <h2>About Cryptocurrency Screener</h2><br>
-        <h4>Cryptocurrency Screener is a cryptocurrency market trends tracker that provides real-time trends of top cryptocurrencies which are listed in order of market capitalization. This screener is equipped with a curated Realtime Price Screener, Stats Table, And top <a href=#news>News Viewer</a> from various sources into a simple, focused format.</h4>
-        <br><a  href="{{ url_for('chart_creator') }}" ><button class="btn btn-default btn-lg">Realtime Screener</button></a>
+    <!-- (About Section) -->
+    <div id="about" class="container-fluid">
+        <div class="row">
+            <div class="col-sm-8">
+                <h2>About Cryptocurrency Screener</h2><br>
+                <h4>Cryptocurrency Screener is a cryptocurrency market trends tracker that provides real-time trends of
+                    top cryptocurrencies which are listed in order of market capitalization. This screener is equipped
+                    with a curated Realtime Price Screener, Stats Table, And top <a href=#news>News Viewer</a> from
+                    various sources into a simple, focused format.</h4>
+                <br><a href="{{ url_for('chart_creator') }}"><button class="btn btn-default btn-lg">Realtime
+                        Screener</button></a>
+                <br>
+                <br><a href="{{ url_for('table_creator') }}"><button class="btn btn-default btn-lg">Top Trending
+                        CryptoCurrencies</button></a>
+            </div>
+            <div class="col-sm-4">
+                <span><img src="{{ url_for('static', filename = 'images/crypto.png') }}" width="100%"></span>
+            </div>
+        </div>
+    </div>
+    <!-- (About Section) -->
+
+
+    <!-- (Features Section) -->
+    <div id="services" class="container-fluid text-center bg-grey">
+        <h2>Features</h2>
+        <h4>What we offer</h4>
         <br>
-        <br><a  href="{{ url_for('table_creator') }}" ><button class="btn btn-default btn-lg">Top Trending CryptoCurrencies</button></a>
-    </div>
-    <div class="col-sm-4">
-        <span><img src="{{ url_for('static', filename = 'images/crypto.png') }}" width="100%"></span>
-    </div>
-    </div>
-</div>
-<!-- (About Section) -->
-
-
-<!-- (Features Section) -->
-<div id="services" class="container-fluid text-center bg-grey">
-    <h2>Features</h2>
-    <h4>What we offer</h4>
-    <br>
-    <div class="row slideanim">
-    <div class="col-sm-4">
-        <span class="glyphicon glyphicon-time logo-small"></span>
-        <h4>RealTime Data</h4>
-        <p>Get your daily dose of <br> 24/7 Cryptocurrency trends and stay woke</p>
-    </div>
-    <div class="col-sm-4">
-        <span class="glyphicon glyphicon-screenshot logo-small"></span>
-        <h4>Accuracy</h4>
-        <p>Accurate Realtime Data, <br> Automatically updated STATS and NEWS</p>
-    </div>
-    <div class="col-sm-4">
-        <span class="glyphicon glyphicon-signal logo-small"></span>
-        <h4>Screener</h4>
-        <p>Have a clear visualisation about <br> the Cryptocurrency trends</p>
-    </div>
-    </div>
-    <br><br>
-</div>
-<!-- (Features Section) -->
-
-
-
-<!-- (News Section) -->
-<div id="news" class="container-fluid text-center bg-blue">
-    <h2>News</h2><br>
-
-    <h2>Top Trending News is Here</h2>
-    <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
-
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-        <h4>"Innovations are very cruel by nature. They destroy the old ones to create space for themselves."<br><span>― Sukant Ratnakar, Quantraz</span></h4>
+        <div class="row slideanim">
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-time logo-small"></span>
+                <h4>RealTime Data</h4>
+                <p>Get your daily dose of <br> 24/7 Cryptocurrency trends and stay woke</p>
+            </div>
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-screenshot logo-small"></span>
+                <h4>Accuracy</h4>
+                <p>Accurate Realtime Data, <br> Automatically updated STATS and NEWS</p>
+            </div>
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-signal logo-small"></span>
+                <h4>Screener</h4>
+                <p>Have a clear visualisation about <br> the Cryptocurrency trends</p>
+            </div>
         </div>
+        <br><br>
+    </div>
+    <!-- (Features Section) -->
 
-        {% for new in news%}
-        <div class="item">
-        <h4>{{new[0]}}<br><span><a href={{new[1]}} target="_blank"><span class="glyphicon glyphicon-new-window"></span> Read More</a></span></h4>
+
+
+    <!-- (News Section) -->
+    <div id="news" class="container-fluid text-center bg-blue">
+        <h2>News</h2><br>
+
+        <h2>Top Trending News is Here</h2>
+        <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <h4>"Innovations are very cruel by nature. They destroy the old ones to create space for
+                        themselves."<br><span>― Sukant Ratnakar, Quantraz</span></h4>
+                </div>
+
+                {% for new in news%}
+                <div class="item">
+                    <h4>{{new[0]}}<br><span><a href={{new[1]}} target="_blank"><span
+                                    class="glyphicon glyphicon-new-window"></span> Read More</a></span></h4>
+                </div>
+                {% endfor%}
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
-        {% endfor%}
+        <br>
+        <br>
+        <h4>Here are some of our news sources</h4>
+        <div class="row text-center slideanim">
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img src="{{ url_for('static', filename = 'images/economics.png') }}" alt="Paris" width="400"
+                        height="300">
+                    <p><strong>Economic Times</strong></p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img src="{{ url_for('static', filename = 'images/times.png') }}" alt="New York" width="400"
+                        height="300">
+                    <p><strong>Times Of India</strong></p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img src="{{ url_for('static', filename = 'images/deccan.png') }}" alt="San Francisco" width="400"
+                        height="300">
+                    <p><strong>Deccan Chronicle</strong></p>
+                </div>
+            </div>
+        </div><br>
+
     </div>
-
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-    </div>
-    <br>
-    <br>
-    <h4>Here are some of our news sources</h4>
-    <div class="row text-center slideanim">
-    <div class="col-sm-4">
-        <div class="thumbnail">
-        <img src="{{ url_for('static', filename = 'images/economics.png') }}" alt="Paris" width="400" height="300">
-        <p><strong>Economic Times</strong></p>
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="thumbnail">
-        <img src="{{ url_for('static', filename = 'images/times.png') }}" alt="New York" width="400" height="300">
-        <p><strong>Times Of India</strong></p>
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="thumbnail">
-        <img src="{{ url_for('static', filename = 'images/deccan.png') }}" alt="San Francisco" width="400" height="300">
-        <p><strong>Deccan Chronicle</strong></p>
-        </div>
-    </div>
-    </div><br>
-
-</div>
-<!-- (News Section) -->
+    <!-- (News Section) -->
 
 
 
-<footer class="container-fluid text-center">
-    <a href="#myPage" title="To Top">
-    <span class="glyphicon glyphicon-chevron-up"></span>
-    </a>
-    <p>© Copyright 2021 <a href="https://github.com/SaiJeevanPuchakayala/CryptoCurrency-Screener">CryptoCurrency Screener</a></p>
-</footer>
+    <footer class="container-fluid text-center">
+        <a href="#myPage" title="To Top">
+            <span class="glyphicon glyphicon-chevron-up"></span>
+        </a>
+        <p>© Copyright 2021 <a href="https://github.com/SaiJeevanPuchakayala/CryptoCurrency-Screener">CryptoCurrency
+                Screener</a></p>
+    </footer>
 
 
-<script>
-$(document).ready(function(){
-    
-    $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
-    
-    if (this.hash !== "") {
-        
-        event.preventDefault();
+    <script>
+        $(document).ready(function () {
 
-        
-        var hash = this.hash;
+            $(".navbar a, footer a[href='#myPage']").on('click', function (event) {
 
-        $('html, body').animate({
-        scrollTop: $(hash).offset().top
-        }, 900, function(){
-    
-        window.location.hash = hash;
-        });
-    }
-    });
-    
-    $(window).scroll(function() {
-    $(".slideanim").each(function(){
-        var pos = $(this).offset().top;
+                if (this.hash !== "") {
 
-        var winTop = $(window).scrollTop();
-        if (pos < winTop + 600) {
-            $(this).addClass("slide");
-        }
-    });
-    });
-})
-</script>
+                    event.preventDefault();
+
+
+                    var hash = this.hash;
+
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 900, function () {
+
+                        window.location.hash = hash;
+                    });
+                }
+            });
+
+            $(window).scroll(function () {
+                $(".slideanim").each(function () {
+                    var pos = $(this).offset().top;
+
+                    var winTop = $(window).scrollTop();
+                    if (pos < winTop + 600) {
+                        $(this).addClass("slide");
+                    }
+                });
+            });
+        })
+    </script>
 
 </body>
+
 </html>
-    
